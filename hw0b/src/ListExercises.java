@@ -36,7 +36,7 @@ public class ListExercises {
     public static List<Integer> common(List<Integer> L1, List<Integer> L2) {
         List<Integer> out= new ArrayList<>();
         for (int elem1 : L1) {
-            if (L2.contains(elem1)) {
+            if (L2.contains(elem1) && !out.contains(elem1)) {
                 out.add(elem1);
             }
         }
