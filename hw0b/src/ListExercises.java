@@ -3,6 +3,8 @@ import javassist.expr.NewArray;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.truth.Truth.assertThat;
+
 public class ListExercises {
 
     /** Returns the total sum in a list of integers */
@@ -40,10 +42,7 @@ public class ListExercises {
                 out.add(elem1);
             }
         }
-        if (out.size() > 0) {
-            return out;
-        }
-        return null;
+        return out;
     }
 
 
