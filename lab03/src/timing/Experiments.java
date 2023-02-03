@@ -60,8 +60,19 @@ public class Experiments {
         List<Integer> opCounts = new ArrayList<>();
 
         // TODO: YOUR CODE HERE
+        for (int N = 1000; N <= 128000; N *= 2) {
+            Ns.add(N);
+            int ops = N;
+            opCounts.add(ops);
+            Stopwatch sw = new Stopwatch();
+            AList l = new AList();
+            for (int j = 0; j < ops; j++) {
+                l.addLast(j);
+            }
+            times.add(sw.elapsedTime());
+        }
 
-        return null;
+        return new TimingData(Ns, times, opCounts);
     }
 
 
@@ -71,8 +82,23 @@ public class Experiments {
         List<Integer> opCounts = new ArrayList<>();
 
         // TODO: YOUR CODE HERE
+        for (int N = 1000; N <= 128000; N *= 2) {
+            SLList L = new SLList<>();
+            Ns.add(N);
+            int ops = 10000;
+            opCounts.add(ops);
+            for (int i = 0; i < N; i++) {
+                L.addLast(i);
+            }
+            Stopwatch sw = new Stopwatch();
+            int M = 10000;
+            for (int j = 0; j < M; j++) {
+                L.getLast();
+            }
+            times.add(sw.elapsedTime());
+        }
 
-        return null;
+        return new TimingData(Ns, times, opCounts);
 
     }
 

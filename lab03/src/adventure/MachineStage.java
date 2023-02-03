@@ -76,7 +76,7 @@ public class MachineStage implements AdventureStage {
     public Map<String, AdventureStage> getResponses() {
         return responses;
     }
-
+/*
     public static int mysteryMax(int a, int b) {
         int w = (b - a) >> 31;
         int z = ~(b - a) >> 31;
@@ -84,7 +84,15 @@ public class MachineStage implements AdventureStage {
         int max = b & w | a & z;
         return max;
     }
-
+*/
+    public static int mysteryMax(int a, int b) {
+        if (a > b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+    /*
     public static int mysteryAdd(int a, int b) {
         int x = a, y = b;
         int xor, and, temp;
@@ -99,7 +107,10 @@ public class MachineStage implements AdventureStage {
         }
         return xor;
     }
-
+*/
+    public static int mysteryAdd(int a, int b) {
+        return a + b;
+    }
     /**
      * Returns a new array where entry i is the max of
      * a[i] and b[i]. For example, if a = {1, -10, 3}
@@ -126,7 +137,7 @@ public class MachineStage implements AdventureStage {
         int i = 0;
         int sum = 0;
         while (i < x.length) {
-            sum = sum + mysteryAdd(sum, x[i]);
+            sum = mysteryAdd(sum, x[i]);
             i = i + 1;
         }
         return sum;
