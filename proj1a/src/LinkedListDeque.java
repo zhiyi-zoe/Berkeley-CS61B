@@ -86,6 +86,11 @@ public class LinkedListDeque<T> implements Deque<T> {
         NowFirst.prev = sentinel;
         OriginFirst.prev = null;
         OriginFirst.next = null;
+
+        if (sentinel.next == null && sentinel.prev == null) {
+            sentinel.prev = sentinel;
+            sentinel.next = sentinel;
+        }
         return OriginFirst.item;
     }
 
@@ -97,6 +102,11 @@ public class LinkedListDeque<T> implements Deque<T> {
         NowLast.next = sentinel;
         OriginLast.prev = null;
         OriginLast.next = null;
+
+        if (sentinel.next == null && sentinel.prev == null) {
+            sentinel.prev = sentinel;
+            sentinel.next = sentinel;
+        }
         return OriginLast.item;
     }
 

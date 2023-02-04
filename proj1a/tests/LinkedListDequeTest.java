@@ -158,10 +158,21 @@ public class LinkedListDequeTest {
         assertThat(lld1.toList()).containsExactly(-2, -1, 0).inOrder();
 
         assertThat(lld1.removeFirst()).isEqualTo(-2); // [-1, 0]
-        assertThat(lld1.toList()).containsExactly(-1, 0).inOrder();
+        lld1.removeFirst(); // [0]
+        lld1.addLast(3); // [0, 3]
+        assertThat(lld1.toList()).containsExactly(0, 3).inOrder();
 
-        lld1.removeLast(); // [-1]
+        lld1.removeFirst(); // [3]
         lld1.removeLast(); // null
+        assertThat(lld1.toList()).isEmpty();
         assertThat(lld1.removeFirst()).isNull();
+        assertThat(lld1.toList()).isEmpty();
+
+        lld1.addFirst(1); // [1]
+        lld1.addFirst(2); // [2, 1]
+        assertThat(lld1.removeFirst()).isEqualTo(2); // [1]
+        lld1.removeFirst(); // null
+        assertThat(lld1.toList()).isEmpty();
+
     }
 }
