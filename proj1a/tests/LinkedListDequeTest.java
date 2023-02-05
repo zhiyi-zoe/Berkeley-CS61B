@@ -173,6 +173,9 @@ public class LinkedListDequeTest {
         assertThat(lld1.removeFirst()).isEqualTo(2); // [1]
         lld1.removeFirst(); // null
         assertThat(lld1.toList()).isEmpty();
+        assertThat(lld1.size()).isEqualTo(0);
+        lld1.addLast(9);
+        assertThat(lld1.toList()).containsExactly(9).inOrder();
 
     }
 }
