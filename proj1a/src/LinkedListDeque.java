@@ -1,3 +1,5 @@
+import org.apache.bcel.generic.PUSH;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +13,10 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     }
     private class Node {
-        public Node prev;
-        public T item;
-        public Node next;
-        public Node (Node m, T i, Node n) {
+        private Node prev;
+        private T item;
+        private Node next;
+        public Node(Node m, T i, Node n) {
             prev = m;
             item = i;
             next = n;
@@ -29,18 +31,18 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public void addFirst(T x) {
-        Node NewFirst = new Node(sentinel, x, sentinel.next);
-        Node OriginFirst = sentinel.next;
-        sentinel.next = NewFirst;
-        OriginFirst.prev = NewFirst;
+        Node newFirst = new Node(sentinel, x, sentinel.next);
+        Node originFirst = sentinel.next;
+        sentinel.next = newFirst;
+        originFirst.prev = newFirst;
     }
 
     @Override
     public void addLast(T x) {
-        Node NewLast = new Node(sentinel.prev, x, sentinel);
-        Node OriginLast = sentinel.prev;
-        OriginLast.next = NewLast;
-        sentinel.prev = NewLast;
+        Node newLast = new Node(sentinel.prev, x, sentinel);
+        Node originLast = sentinel.prev;
+        originLast.next = newLast;
+        sentinel.prev = newLast;
     }
 
     @Override
@@ -59,64 +61,60 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public boolean isEmpty() {
-        Node First = sentinel.next;
-        if (First.item == null) {
-            return true;
-        } else {
-            return false;
-        }
+        Node first = sentinel.next;
+        return first.item == null;
     }
 
     @Override
     public int size() {
-        Node First = sentinel.next;
+        Node first = sentinel.next;
         int result = 0;
-        while (First.item != null) {
+        while (first.item != null) {
             result += 1;
-            First = First.next;
+            first = first.next;
         }
         return result;
     }
 
     @Override
     public T removeFirst() {
-        Node OriginFirst = sentinel.next;
-        Node NowFirst = OriginFirst.next;
-        sentinel.next = NowFirst;
-        NowFirst.prev = sentinel;
-        OriginFirst.prev = null;
-        OriginFirst.next = null;
+        Node originFirst = sentinel.next;
+        Node nowFirst = originFirst.next;
+        sentinel.next = nowFirst;
+        nowFirst.prev = sentinel;
+        originFirst.prev = null;
+        originFirst.next = null;
 
         if (sentinel.next == null && sentinel.prev == null) {
             sentinel.prev = sentinel;
             sentinel.next = sentinel;
         }
-        return OriginFirst.item;
+        return originFirst.item;
     }
 
     @Override
     public T removeLast() {
-        Node OriginLast = sentinel.prev;
-        Node NowLast = OriginLast.prev;
-        sentinel.prev = NowLast;
-        NowLast.next = sentinel;
-        OriginLast.prev = null;
-        OriginLast.next = null;
+        Node originLast = sentinel.prev;
+        Node nowLast = originLast.prev;
+        sentinel.prev = nowLast;
+        nowLast.next = sentinel;
+        originLast.prev = null;
+        originLast.next = null;
 
         if (sentinel.next == null && sentinel.prev == null) {
             sentinel.prev = sentinel;
             sentinel.next = sentinel;
         }
-        return OriginLast.item;
+        return originLast.item;
     }
 
     @Override
     public T get(int index) {
-        Node Now = sentinel.next;
+        Node now = sentinel.next;
         T result = null;
-        while (index >= 0 && Now.item != null) {
-            result = Now.item;
-            Now = Now.next;
+        while (index >= 0 && now.item != null) {
+            result = now.item;
+            now = now.next;
             index -= 1;
         }
         if (index >= 0) {
@@ -128,6 +126,7 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T getRecursive(int index) {
+        /*
         Node p = sentinel;
         T result = null;
         while (index >= 0) {
@@ -139,6 +138,29 @@ public class LinkedListDeque<T> implements Deque<T> {
             }
         }
         sentinel = p;
-        return result;
+        return result; */
+        Node update = sentinel.next;
+        if (index < 0) {
+            return null;
+        } else {
+            while (index >= 0) {
+                index -= 1;
+                update = nextNode(index, update);
+                if (update == null) {
+                    return null;
+                }
+            }
+            return update.item;
+        }
+    }
+
+    public Node nextNode(int index, Node nowNode) {
+        if (index == -1) {
+            return nowNode;
+        } else if (nowNode.item == null) {
+            return null;
+        } else {
+            return nowNode.next;
+        }
     }
 }
