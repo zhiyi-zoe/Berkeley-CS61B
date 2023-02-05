@@ -121,41 +121,25 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public T getRecursive(int index) {
-        /*
-        Node p = sentinel;
-        T result = null;
-        while (index >= 0) {
-            sentinel = sentinel.next;
-            result = sentinel.item;
-            index -= 1;
-            if (result == null) {
-                return null;
-            }
-        }
-        sentinel = p;
-        return result; */
         Node update = sentinel.next;
         if (index < 0) {
             return null;
         } else {
-            while (index >= 0) {
-                index -= 1;
-                update = nextNode(index, update);
-                if (update == null) {
-                    return null;
-                }
+            update = nextNode(index, update);
+            if (update == null) {
+                return null;
             }
             return update.item;
         }
     }
 
     public Node nextNode(int index, Node nowNode) {
-        if (index == -1) {
+        if (index == 0) {
             return nowNode;
         } else if (nowNode.item == null) {
             return null;
         } else {
-            return nowNode.next;
+            return nextNode(index - 1, nowNode.next);
         }
     }
 }
