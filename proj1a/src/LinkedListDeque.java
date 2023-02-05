@@ -5,11 +5,13 @@ import java.util.List;
 
 public class LinkedListDeque<T> implements Deque<T> {
     private Node sentinel;
+    private int size;
     public LinkedListDeque() {
 
         sentinel = new Node(null, null, null);
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
+        size = 0;
 
     }
     private class Node {
@@ -35,6 +37,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         Node originFirst = sentinel.next;
         sentinel.next = newFirst;
         originFirst.prev = newFirst;
+        size += 1;
     }
 
     @Override
@@ -43,6 +46,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         Node originLast = sentinel.prev;
         originLast.next = newLast;
         sentinel.prev = newLast;
+        size += 1;
     }
 
     @Override
@@ -61,51 +65,44 @@ public class LinkedListDeque<T> implements Deque<T> {
 
     @Override
     public boolean isEmpty() {
-        Node first = sentinel.next;
-        return first.item == null;
+        return size == 0;
     }
 
     @Override
     public int size() {
-        Node first = sentinel.next;
-        int result = 0;
-        while (first.item != null) {
-            result += 1;
-            first = first.next;
-        }
-        return result;
+        return size;
     }
 
     @Override
     public T removeFirst() {
-        Node originFirst = sentinel.next;
-        Node nowFirst = originFirst.next;
-        sentinel.next = nowFirst;
-        nowFirst.prev = sentinel;
-        originFirst.prev = null;
-        originFirst.next = null;
-
-        if (sentinel.next == null && sentinel.prev == null) {
-            sentinel.prev = sentinel;
-            sentinel.next = sentinel;
+        if (size > 0) {
+            Node originFirst = sentinel.next;
+            Node nowFirst = originFirst.next;
+            sentinel.next = nowFirst;
+            nowFirst.prev = sentinel;
+            originFirst.prev = null;
+            originFirst.next = null;
+            size -= 1;
+            return originFirst.item;
+        } else {
+            return null;
         }
-        return originFirst.item;
     }
 
     @Override
     public T removeLast() {
-        Node originLast = sentinel.prev;
-        Node nowLast = originLast.prev;
-        sentinel.prev = nowLast;
-        nowLast.next = sentinel;
-        originLast.prev = null;
-        originLast.next = null;
-
-        if (sentinel.next == null && sentinel.prev == null) {
-            sentinel.prev = sentinel;
-            sentinel.next = sentinel;
+        if (size > 0) {
+            Node originLast = sentinel.prev;
+            Node nowLast = originLast.prev;
+            sentinel.prev = nowLast;
+            nowLast.next = sentinel;
+            originLast.prev = null;
+            originLast.next = null;
+            size -= 1;
+            return originLast.item;
+        } else {
+            return null;
         }
-        return originLast.item;
     }
 
     @Override
