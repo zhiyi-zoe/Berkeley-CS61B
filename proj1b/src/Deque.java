@@ -65,4 +65,6 @@ public interface Deque<T> {
      * @return element at {@code index} in the deque
      */
     T get(int index);
+
+    boolean usageFactor();
 }
