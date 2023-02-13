@@ -3,10 +3,10 @@ import java.util.List;
 
 public class ArrayDeque<T> implements Deque<T> {
     public ArrayDeque() {
-        items = (T[]) new Object[8];
+        items = (T[]) new Object[2 * 2 * 2];
         size = 0;
-        nextFirst = 4;
-        nextLast = 5;
+        nextFirst = 0;
+        nextLast = 1;
     }
     private int size;
     private int nextFirst;
@@ -15,12 +15,6 @@ public class ArrayDeque<T> implements Deque<T> {
     public static void main(String[] args) {
 
         Deque<Integer> ad = new ArrayDeque<>();
-        for (int i = 0; i < 20; i++) {
-            ad.addLast(i);
-        }
-        for (int j = 0; j < 18; j++) {
-            ad.removeLast();
-        }
 
     }
 
@@ -143,8 +137,9 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index >= items.length)
+        if (index < 0 || index >= items.length) {
             return null;
+        }
         int realIndex = nextFirst + 1 + index;
         if (realIndex >= items.length) {
             realIndex -= items.length;
@@ -152,11 +147,11 @@ public class ArrayDeque<T> implements Deque<T> {
 
         return items[realIndex];
     }
-    @Override
-    public boolean usageFactor() {
 
+    public boolean usageFactor() {
+        int judgeLength = 2 * 2 * 2 * 2;
         double result = (double) size / items.length;
-        return items.length < 16 || result >= 0.25;
+        return items.length < judgeLength || result >= 0.25;
     }
 
     public void resizingDown(int capacity) {
