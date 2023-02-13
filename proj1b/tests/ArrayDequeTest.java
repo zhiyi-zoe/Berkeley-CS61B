@@ -142,13 +142,13 @@ public class ArrayDequeTest {
             ad1.addLast(5);
         }
 
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
 
         for (int j = 0; j < 9999; j++) {
             ad1.removeFirst();
         }
 
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
 
         for (int i = 0; i < 10000; i++) {
             ad1.addFirst(5);
@@ -157,7 +157,7 @@ public class ArrayDequeTest {
         for (int j = 0; j < 9999; j++) {
             ad1.removeLast();
         }
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
 
     }
 
