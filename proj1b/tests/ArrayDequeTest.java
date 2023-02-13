@@ -144,17 +144,29 @@ public class ArrayDequeTest {
 
         assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
 
-        for (int j = 0; j < 9999; j++) {
+        for (int j = 0; j < 7500; j++) {
             ad1.removeFirst();
         }
 
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        ad1.removeFirst();
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        for (int j = 0; j < 2499; j++) {
+            ad1.removeFirst();
+        }
         assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
 
         for (int i = 0; i < 10000; i++) {
             ad1.addFirst(5);
         }
 
-        for (int j = 0; j < 9999; j++) {
+        for (int j = 0; j < 7500; j++) {
+            ad1.removeLast();
+        }
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        ad1.removeLast();
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        for (int j = 0; j < 2499; j++) {
             ad1.removeLast();
         }
         assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
