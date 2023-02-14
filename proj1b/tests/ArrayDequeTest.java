@@ -99,70 +99,70 @@ public class ArrayDequeTest {
     }
     @Test
     public void removeFirstAndRemoveLastTest() {
-        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        Deque<Integer> ad1 = new ArrayDeque<>();
 
          /* I've decided to add in comments the state after each call for the convenience of the
             person reading this test. Some programmers might consider this excessively verbose. */
         ad1.addLast(0);   // [0]
         ad1.addLast(1);   // [0, 1]
         ad1.addFirst(-1); // [-1, 0, 1]
+        ad1.addLast(2);   // [-1, 0, 1, 2]
+        ad1.addFirst(-2); // [-2, -1, 0, 1, 2]
 
-        assertThat(ad1.removeLast()).isEqualTo(1); // [-1, 0]
-        assertThat(ad1.toList()).containsExactly(-1, 0).inOrder();
-        ad1.removeLast(); // [-1]
-        assertThat(ad1.toList()).containsExactly(-1).inOrder();
-        assertThat(ad1.removeLast()).isEqualTo(-1);
-        assertThat(ad1.usageFactor()).isEqualTo(true);
-        assertThat(ad1.removeFirst()).isNull();
+        assertThat(ad1.removeLast()).isEqualTo(2); // [-2, -1, 0, 1]
+        ad1.removeLast(); // [-2, -1, 0]
+
+        assertThat(ad1.toList()).containsExactly(-2, -1, 0).inOrder();
+
+        assertThat(ad1.removeFirst()).isEqualTo(-2); // [-1, 0]
+        ad1.removeFirst(); // [0]
+        ad1.addLast(3); // [0, 3]
+        assertThat(ad1.toList()).containsExactly(0, 3).inOrder();
+
+
+        ad1.removeFirst(); // [3]
+        ad1.removeLast(); // null
         assertThat(ad1.toList()).isEmpty();
-        assertThat(ad1.usageFactor()).isEqualTo(true);
-
-        ad1.addFirst(3); // [3]
-        assertThat(ad1.toList()).containsExactly(3).inOrder();
-        ad1.addFirst(2);
-        assertThat(ad1.removeFirst()).isEqualTo(2);
-        assertThat(ad1.usageFactor()).isEqualTo(true);
-        assertThat(ad1.removeFirst()).isEqualTo(3);
-        assertThat(ad1.removeLast()).isNull();
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(ad1.removeFirst()).isNull();
         assertThat(ad1.toList()).isEmpty();
 
         ad1.addFirst(1); // [1]
         ad1.addFirst(2); // [2, 1]
-        assertThat(ad1.size()).isEqualTo(2);
-        assertThat(ad1.usageFactor()).isEqualTo(true);
         assertThat(ad1.removeFirst()).isEqualTo(2); // [1]
         ad1.removeFirst(); // null
         assertThat(ad1.toList()).isEmpty();
         assertThat(ad1.size()).isEqualTo(0);
-        assertThat(ad1.usageFactor()).isEqualTo(true);
-        assertThat(ad1.size()).isEqualTo(0);
         ad1.addLast(9);
         assertThat(ad1.toList()).containsExactly(9).inOrder();
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+
+        ad1.addLast(10);
+        ad1.addLast(11);
+        assertThat(ad1.removeLast()).isEqualTo(11);
+        assertThat(ad1.removeLast()).isEqualTo(10);
+        assertThat(ad1.toList()).containsExactly(9).inOrder();
 
     }
 
     @Test
     public void resizingDown() {
-        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
+        Deque<Integer> ad1 = new ArrayDeque<>();
         for (int i = 0; i < 10000; i++) {
             ad1.addLast(5);
         }
 
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(ad1.size()).isEqualTo(10000);
 
         for (int j = 0; j < 7500; j++) {
             ad1.removeFirst();
         }
 
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(ad1.size()).isEqualTo(2500);
         ad1.removeFirst();
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(ad1.size()).isEqualTo(2499);
         for (int j = 0; j < 2499; j++) {
             ad1.removeFirst();
         }
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(ad1.size()).isEqualTo(0);
 
         for (int i = 0; i < 10000; i++) {
             ad1.addFirst(5);
@@ -171,13 +171,13 @@ public class ArrayDequeTest {
         for (int j = 0; j < 7500; j++) {
             ad1.removeLast();
         }
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(ad1.size()).isEqualTo(2500);
         ad1.removeLast();
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(ad1.size()).isEqualTo(2499);
         for (int j = 0; j < 2499; j++) {
             ad1.removeLast();
         }
-        assertThat(ad1.usageFactor()).isEqualTo(true);
+        assertThat(ad1.size()).isEqualTo(0);
 
     }
 
