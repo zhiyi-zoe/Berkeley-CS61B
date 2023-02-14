@@ -99,7 +99,7 @@ public class ArrayDequeTest {
     }
     @Test
     public void removeFirstAndRemoveLastTest() {
-        Deque<Integer> ad1 = new ArrayDeque<>();
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
 
          /* I've decided to add in comments the state after each call for the convenience of the
             person reading this test. Some programmers might consider this excessively verbose. */
@@ -112,57 +112,57 @@ public class ArrayDequeTest {
         ad1.removeLast(); // [-1]
         assertThat(ad1.toList()).containsExactly(-1).inOrder();
         assertThat(ad1.removeLast()).isEqualTo(-1);
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
         assertThat(ad1.removeFirst()).isNull();
         assertThat(ad1.toList()).isEmpty();
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
 
         ad1.addFirst(3); // [3]
         assertThat(ad1.toList()).containsExactly(3).inOrder();
         ad1.addFirst(2);
         assertThat(ad1.removeFirst()).isEqualTo(2);
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
         assertThat(ad1.removeFirst()).isEqualTo(3);
         assertThat(ad1.removeLast()).isNull();
+        assertThat(ad1.usageFactor()).isEqualTo(true);
         assertThat(ad1.toList()).isEmpty();
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
 
         ad1.addFirst(1); // [1]
         ad1.addFirst(2); // [2, 1]
         assertThat(ad1.size()).isEqualTo(2);
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
         assertThat(ad1.removeFirst()).isEqualTo(2); // [1]
         ad1.removeFirst(); // null
         assertThat(ad1.toList()).isEmpty();
         assertThat(ad1.size()).isEqualTo(0);
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
         assertThat(ad1.size()).isEqualTo(0);
         ad1.addLast(9);
         assertThat(ad1.toList()).containsExactly(9).inOrder();
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
 
     }
 
     @Test
     public void resizingDown() {
-        Deque<Integer> ad1 = new ArrayDeque<>();
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
         for (int i = 0; i < 10000; i++) {
             ad1.addLast(5);
         }
 
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
 
         for (int j = 0; j < 7500; j++) {
             ad1.removeFirst();
         }
 
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
         ad1.removeFirst();
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
         for (int j = 0; j < 2499; j++) {
             ad1.removeFirst();
         }
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
 
         for (int i = 0; i < 10000; i++) {
             ad1.addFirst(5);
@@ -171,13 +171,13 @@ public class ArrayDequeTest {
         for (int j = 0; j < 7500; j++) {
             ad1.removeLast();
         }
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
         ad1.removeLast();
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
         for (int j = 0; j < 2499; j++) {
             ad1.removeLast();
         }
-        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        assertThat(ad1.usageFactor()).isEqualTo(true);
 
     }
 
