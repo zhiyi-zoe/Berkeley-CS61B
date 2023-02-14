@@ -27,7 +27,7 @@ public class ArrayDeque<T> implements Deque<T> {
         } else {
             System.arraycopy(items, 0, a, 0, nextLast);
             System.arraycopy(items, nextFirst + 1, a, nextFirst + 1 + size, size - nextFirst - 1);
-            nextFirst += 1;
+            nextFirst += size;
         }
         items = a;
     }
@@ -137,7 +137,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index >= items.length) {
+        if (index < 0 || index >= size) {
             return null;
         }
         int realIndex = nextFirst + 1 + index;
