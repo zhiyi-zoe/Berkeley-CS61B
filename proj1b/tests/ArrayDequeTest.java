@@ -111,12 +111,14 @@ public class ArrayDequeTest {
 
         assertThat(ad1.removeLast()).isEqualTo(2); // [-2, -1, 0, 1]
         ad1.removeLast(); // [-2, -1, 0]
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
         assertThat(ad1.toList()).containsExactly(-2, -1, 0).inOrder();
 
         assertThat(ad1.removeFirst()).isEqualTo(-2); // [-1, 0]
         ad1.removeFirst(); // [0]
         ad1.addLast(3); // [0, 3]
         assertThat(ad1.toList()).containsExactly(0, 3).inOrder();
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
 
         ad1.removeFirst(); // [3]
         ad1.removeLast(); // null
@@ -131,6 +133,12 @@ public class ArrayDequeTest {
         assertThat(ad1.toList()).isEmpty();
         assertThat(ad1.size()).isEqualTo(0);
         ad1.addLast(9);
+        assertThat(ad1.toList()).containsExactly(9).inOrder();
+        assertThat(((ArrayDeque<Integer>) ad1).usageFactor()).isEqualTo(true);
+        ad1.addLast(10);
+        ad1.addLast(11);
+        assertThat(ad1.removeLast()).isEqualTo(11);
+        assertThat(ad1.removeLast()).isEqualTo(10);
         assertThat(ad1.toList()).containsExactly(9).inOrder();
 
     }
