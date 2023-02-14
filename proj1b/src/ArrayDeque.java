@@ -26,7 +26,7 @@ public class ArrayDeque<T> implements Deque<T> {
             nextLast = size;
         } else {
             System.arraycopy(items, 0, a, 0, nextLast);
-            System.arraycopy(items, nextFirst + 1, a, nextFirst + 2, size - nextFirst - 1);
+            System.arraycopy(items, nextFirst + 1, a, nextFirst + 1 + size, size - nextFirst - 1);
             nextFirst += 1;
         }
         items = a;
@@ -34,7 +34,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public void addFirst(T x) {
         if (size == items.length) {
-            resize(size + 1);
+            resize(size * 2);
         }
         items[nextFirst] = x;
         if (nextFirst == 0) {
@@ -48,7 +48,7 @@ public class ArrayDeque<T> implements Deque<T> {
     @Override
     public void addLast(T x) {
         if (size == items.length) {
-            resize(size + 1);
+            resize(size * 2);
         }
         items[nextLast] = x;
         if (nextLast == items.length - 1) {
