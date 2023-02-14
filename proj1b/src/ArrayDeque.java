@@ -150,7 +150,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     public boolean usageFactor() {
         int judgeLength = 2 * 2 * 2 * 2;
-        double result = (double) size / items.length;
+        double result = ((double) size) / items.length;
         return items.length < judgeLength || result >= 0.25;
     }
 
