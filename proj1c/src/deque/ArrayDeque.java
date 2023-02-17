@@ -12,7 +12,7 @@ public class ArrayDeque<T> implements Deque<T> {
         nextFirst = 0;
         nextLast = 1;
     }
-    private int size;
+    int size;
     private int nextFirst;
     private T[] items;
     private int nextLast;
@@ -235,18 +235,6 @@ public class ArrayDeque<T> implements Deque<T> {
             if (this.size != oa.size) {
                 return false;
             }
-
-            /*
-            int currIndex = 0;
-            // check that all of MY items are in the other array
-            while (currIndex < this.size) {
-                if (this.get(currIndex) != oa.get(currIndex)) {
-                    return false;
-                }
-                currIndex += 1;
-            }
-
-             */
             for (T x : this) {
                 if (!oa.contains(x)) {
                     return false;

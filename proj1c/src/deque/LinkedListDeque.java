@@ -204,21 +204,21 @@ public class LinkedListDeque<T> implements Deque<T> {
                 }
             }
             return true;
-/*
-            Node now = this.sentinel.next;
-            Node ollNow = oll.sentinel.next;
-            // check that all of MY items are in the other linked list
-            while (now.item != null) {
-                if (now.item != ollNow.item) {
+        }
+
+        if (other instanceof ArrayDeque oa) {
+            // check LinkedLists are of the same size
+            if (this.size != oa.size) {
+                return false;
+            }
+            for (T x : this) {
+                if (!oa.contains(x)) {
                     return false;
                 }
-                now = now.next;
-                ollNow = ollNow.next;
             }
             return true;
-
- */
         }
+
         return false;
     }
 
