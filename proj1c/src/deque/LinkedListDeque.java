@@ -179,6 +179,15 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
+    private boolean contains(T x) {
+        for (int i = 0; i < size; i += 1) {
+            if (this.get(i).equals(x)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -209,15 +218,6 @@ public class LinkedListDeque<T> implements Deque<T> {
             return true;
 
  */
-        }
-        return false;
-    }
-
-    private boolean contains(T x) {
-        for (int i = 0; i < size; i += 1) {
-            if (this.get(i).equals(x)) {
-                return true;
-            }
         }
         return false;
     }

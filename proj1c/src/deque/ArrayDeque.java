@@ -217,7 +217,7 @@ public class ArrayDeque<T> implements Deque<T> {
 
     public boolean contains(T x) {
         for (int i = 0; i < size; i += 1) {
-            if (this.get(i) == x) {
+            if (this.get(i).equals(x)) {
                 return true;
             }
         }
