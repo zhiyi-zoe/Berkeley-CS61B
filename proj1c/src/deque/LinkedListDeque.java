@@ -189,7 +189,13 @@ public class LinkedListDeque<T> implements Deque<T> {
             if (this.size != oll.size) {
                 return false;
             }
-
+            for (T x : this) {
+                if (!oll.contains(x)) {
+                    return false;
+                }
+            }
+            return true;
+/*
             Node now = this.sentinel.next;
             Node ollNow = oll.sentinel.next;
             // check that all of MY items are in the other linked list
@@ -201,6 +207,17 @@ public class LinkedListDeque<T> implements Deque<T> {
                 ollNow = ollNow.next;
             }
             return true;
+
+ */
+        }
+        return false;
+    }
+
+    private boolean contains(T x) {
+        for (int i = 0; i < size; i += 1) {
+            if (this.get(i).equals(x)) {
+                return true;
+            }
         }
         return false;
     }

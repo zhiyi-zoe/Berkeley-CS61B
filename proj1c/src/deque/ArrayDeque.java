@@ -215,6 +215,15 @@ public class ArrayDeque<T> implements Deque<T> {
         }
     }
 
+    public boolean contains(T x) {
+        for (int i = 0; i < size; i += 1) {
+            if (this.get(i) == x) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -227,6 +236,7 @@ public class ArrayDeque<T> implements Deque<T> {
                 return false;
             }
 
+            /*
             int currIndex = 0;
             // check that all of MY items are in the other array
             while (currIndex < this.size) {
@@ -234,6 +244,13 @@ public class ArrayDeque<T> implements Deque<T> {
                     return false;
                 }
                 currIndex += 1;
+            }
+
+             */
+            for (T x : this) {
+                if (!oa.contains(x)) {
+                    return false;
+                }
             }
             return true;
         }
