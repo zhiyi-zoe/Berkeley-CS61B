@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 public class LinkedListDeque<T> implements Deque<T> {
 
     private Node sentinel;
-    private int size;
+    int size;
     public LinkedListDeque() {
 
         sentinel = new Node(null, null, null);
@@ -179,7 +179,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    private boolean contains(T x) {
+    boolean contains(T x) {
         for (int i = 0; i < size; i += 1) {
             if (this.get(i).equals(x)) {
                 return true;

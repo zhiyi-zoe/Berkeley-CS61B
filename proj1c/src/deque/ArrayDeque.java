@@ -254,6 +254,20 @@ public class ArrayDeque<T> implements Deque<T> {
             }
             return true;
         }
+
+        if (other instanceof LinkedListDeque oll) {
+            // check LinkedLists are of the same size
+            if (this.size != oll.size) {
+                return false;
+            }
+            for (T x : this) {
+                if (!oll.contains(x)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         return false;
     }
 
