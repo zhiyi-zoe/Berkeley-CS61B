@@ -4,19 +4,19 @@ ArrayDeque:
 
 Q: Give an example of at least one idea from the staff solution that would have made your solution better (if any).
 
-A: 
+A: The staff solution created the wrapIndex method to avoid redundant codes, while my previous solution used negative index judgement multiple times.
 
 Q: What's something you felt proud of in your code, if anything?
 
-A:
+A: 
 
 Q: What's something that was particularly inelegant in your code, if anything?
 
-A:
+A: I used "System.arraycopy" instead of for loop to resize array so that it was really hard to debug.
 
 Q: What did you learn by talking to your partner about writing ArrayDeque?
 
-A:
+A: 
 
 Q: What do you wish you would have known before writing ArrayDeque, if anything?
 
@@ -24,7 +24,7 @@ A:
 
 Q: If you wrote ArrayDeque again, what would you do differently, if anything?
 
-A:
+A: I would use for loop instead of arraycopy method to resize the array and use get method to get items in it.
 
 -----
 
@@ -32,7 +32,7 @@ LinkedListDeque:
 
 Q: Give an example of at least one idea from the staff solution that would have made your solution better (if any).
 
-A: 
+A: The recursive method the staff demonstrates are much clearer than my solution. I created Node both in getRecursive and its helper method and it was hard to debug, while in TA's solution Node is created once.
 
 Q: What's something you felt proud of in your code, if anything?
 
@@ -44,11 +44,11 @@ A:
 
 Q: What did you learn by talking to your partner about writing LinkedListDeque?
 
-A:
+A: Thinking about how constructor build is important for the beginning of a project.
 
 Q: What do you wish you would have known before writing LinkedListDeque, if anything?
 
-A:
+A: 
 
 Q: If you wrote LinkedListDeque again, what would you do differently, if anything?
 
