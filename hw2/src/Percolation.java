@@ -44,8 +44,10 @@ public class Percolation {
             if (row == 0) {
                 square.union(xyTo1D(row, col), rowLength * rowLength);
             }
-            if (row == rowLength) {
-                square.union(xyTo1D(row, col), rowLength * rowLength + 1);
+            if (row == rowLength - 1) {
+                if (!this.percolates()) {
+                    square.union(xyTo1D(row, col), rowLength * rowLength + 1);
+                }
             }
         }
     }
@@ -63,9 +65,6 @@ public class Percolation {
 
     public boolean isFull(int row, int col) {
         if (square.connected(xyTo1D(row, col), rowLength * rowLength)) {
-            return true;
-        }
-        if (square.connected(xyTo1D(row, col), rowLength * rowLength + 1)) {
             return true;
         }
         return false;
