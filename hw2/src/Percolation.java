@@ -18,10 +18,6 @@ public class Percolation {
         }
         square = new WeightedQuickUnionUF(N * N + 2);
         rowLength = N;
-        for (int j = 0; j < N; j++) {
-            square.union(j, N * N);
-            square.union(N * N - j - 1, N * N + 1);
-        }
         size = 0;
     }
 
@@ -43,6 +39,13 @@ public class Percolation {
             }
             if (row + 1 < rowLength && id[row + 1][col]) {
                 square.union(xyTo1D(row, col), xyTo1D(row + 1, col));
+            }
+
+            if (row == 0) {
+                square.union(xyTo1D(row, col), rowLength * rowLength);
+            }
+            if (row == rowLength) {
+                square.union(xyTo1D(row, col), rowLength * rowLength + 1);
             }
         }
     }
