@@ -12,9 +12,15 @@ import java.util.TreeMap;
  */
 public class TimeSeries extends TreeMap<Integer, Double> {
 
+<<<<<<< HEAD
     private static int MIN_YEAR = 1400;
     private static int MAX_YEAR = 2100;
     private TimeSeries timeSeries;
+=======
+    private static final int MIN_YEAR = 1400;
+    private static final int MAX_YEAR = 2100;
+    // TODO: Add any necessary static/instance variables.
+>>>>>>> f156b98b7f8ed7869a60ca6272ca800b96609f95
 
     /**
      * Constructs a new empty TimeSeries.
