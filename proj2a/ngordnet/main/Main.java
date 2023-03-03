@@ -11,7 +11,7 @@ public class Main {
         NGramMap ngm = new NGramMap(wordFile, countFile);
 
         hns.startUp();
-        hns.register("history", new DummyHistoryHandler());
+        hns.register("history", new HistoryHandler(ngm));
         hns.register("historytext", new HistoryTextHandler(ngm));
     }
 }
