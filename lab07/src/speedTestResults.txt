@@ -1,0 +1,1 @@
+There are 4 types of maps in the test and all of them only use 0.00 second to execute the program.

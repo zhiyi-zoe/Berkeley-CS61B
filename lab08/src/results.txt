@@ -1,0 +1,3 @@
+When we want to insert a series of number into an object, we should choose BSTree.
+The HashMap performs better, when we hope to insert the items randomly and other people have no access to the secret thanks to the hashCode method.
+Besides, the HashMap executes much faster than the BSTree.
